@@ -16,7 +16,8 @@ export class SentryConfigValidator {
       throw new SentryConfigError('DSN must start with https://');
     }
 
-    if (!config.dsn.includes('@') || !config.dsn.includes('.ingest.sentry.io/')) {
+    // Support regional Sentry domains: .ingest.sentry.io, .ingest.us.sentry.io, .ingest.de.sentry.io, etc.
+    if (!config.dsn.includes('@') || !config.dsn.includes('.sentry.io/')) {
       throw new SentryConfigError('Invalid DSN format');
     }
 
@@ -33,6 +34,18 @@ export class SentryConfigValidator {
     if (config.maxBreadcrumbs !== undefined) {
       if (config.maxBreadcrumbs < 0 || config.maxBreadcrumbs > 200) {
         throw new SentryConfigError('maxBreadcrumbs must be between 0 and 200');
+      }
+    }
+
+    if (config.replaysSessionSampleRate !== undefined) {
+      if (config.replaysSessionSampleRate < 0 || config.replaysSessionSampleRate > 1) {
+        throw new SentryConfigError('replaysSessionSampleRate must be between 0 and 1');
+      }
+    }
+
+    if (config.replaysOnErrorSampleRate !== undefined) {
+      if (config.replaysOnErrorSampleRate < 0 || config.replaysOnErrorSampleRate > 1) {
+        throw new SentryConfigError('replaysOnErrorSampleRate must be between 0 and 1');
       }
     }
   }

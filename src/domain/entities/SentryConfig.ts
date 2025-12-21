@@ -58,4 +58,31 @@ export interface SentryConfig {
    * Should be false in production
    */
   debug?: boolean;
+
+  /**
+   * Enable Sentry Logs
+   * Default: false
+   */
+  enableLogs?: boolean;
+
+  /**
+   * Session Replay sample rate (0.0 to 1.0)
+   * Percentage of sessions to record for replay
+   * Default: 0.1 (10%)
+   */
+  replaysSessionSampleRate?: number;
+
+  /**
+   * Session Replay on error sample rate (0.0 to 1.0)
+   * Percentage of error sessions to record for replay
+   * Default: 1.0 (100%)
+   */
+  replaysOnErrorSampleRate?: number;
+
+  /**
+   * Send default PII (Personally Identifiable Information)
+   * Adds more context data to events (IP address, cookies, user, etc.)
+   * Default: false
+   */
+  sendDefaultPii?: boolean;
 }

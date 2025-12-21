@@ -20,6 +20,13 @@ export interface NativeSentryAdapter {
 
 export const nativeSentryAdapter: NativeSentryAdapter = {
   init(config: SentryConfig): void {
+    const integrations: any[] = [];
+
+    // Add Session Replay integration if enabled
+    if (config.replaysSessionSampleRate || config.replaysOnErrorSampleRate) {
+      integrations.push(Sentry.mobileReplayIntegration());
+    }
+
     Sentry.init({
       dsn: config.dsn,
       environment: config.environment,
@@ -32,9 +39,21 @@ export const nativeSentryAdapter: NativeSentryAdapter = {
       debug: config.debug ?? false,
       enableAutoPerformanceTracing: true,
       enableNativeCrashHandling: true,
+
+      // Session Replay
+      replaysSessionSampleRate: config.replaysSessionSampleRate ?? 0.1,
+      replaysOnErrorSampleRate: config.replaysOnErrorSampleRate ?? 1.0,
+      integrations: integrations.length > 0 ? integrations : undefined,
+
+      // Logs
+      enableLogs: config.enableLogs ?? false,
+
+      // PII
+      sendDefaultPii: config.sendDefaultPii ?? false,
+
       beforeSend: (event) => {
-        // Privacy: Mask email in production
-        if (!__DEV__ && event.user?.email) {
+        // Privacy: Mask email in production unless sendDefaultPii is true
+        if (!__DEV__ && !config.sendDefaultPii && event.user?.email) {
           event.user.email = '***@***.***';
         }
         return event;

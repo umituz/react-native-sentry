@@ -36,3 +36,11 @@ export { useSentry } from './presentation/hooks/useSentry';
 export type { UseSentryReturn } from './presentation/hooks/useSentry';
 export { useBreadcrumb } from './presentation/hooks/useBreadcrumb';
 export type { UseBreadcrumbReturn } from './presentation/hooks/useBreadcrumb';
+
+// Sentry Tracking Utilities (for use in other packages)
+export {
+  trackPackageError,
+  addPackageBreadcrumb,
+  trackPackageWarning,
+} from './presentation/utils/sentryTracking';
+export type { PackageErrorContext } from './presentation/utils/sentryTracking';
