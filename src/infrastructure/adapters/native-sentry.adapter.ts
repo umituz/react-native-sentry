@@ -26,7 +26,7 @@ export const nativeSentryAdapter: NativeSentryAdapter = {
       release: config.release,
       tracesSampleRate: config.tracesSampleRate ?? 0.1,
       enableNative: config.enableNative ?? true,
-      autoSessionTracking: config.autoSessionTracking ?? true,
+      enableAutoSessionTracking: config.enableAutoSessionTracking ?? true,
       attachScreenshot: config.attachScreenshot ?? false,
       maxBreadcrumbs: config.maxBreadcrumbs ?? 100,
       debug: config.debug ?? false,

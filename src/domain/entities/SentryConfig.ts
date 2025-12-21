@@ -39,7 +39,7 @@ export interface SentryConfig {
    * Enable automatic session tracking
    * Default: true
    */
-  autoSessionTracking?: boolean;
+  enableAutoSessionTracking?: boolean;
 
   /**
    * Attach screenshot on errors (production only)
