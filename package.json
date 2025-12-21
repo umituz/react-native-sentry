@@ -1,6 +1,6 @@
 {
   "name": "@umituz/react-native-sentry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Production-ready error tracking and performance monitoring for React Native apps",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
