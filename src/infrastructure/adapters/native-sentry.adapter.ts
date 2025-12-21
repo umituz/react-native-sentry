@@ -4,6 +4,7 @@
  */
 
 import * as Sentry from '@sentry/react-native';
+import type { SeverityLevel } from '@sentry/types';
 import type { SentryConfig } from '../../domain/entities/SentryConfig';
 import type { UserData, Breadcrumb } from '../../domain/value-objects/ErrorMetadata';
 import type { CaptureMetadata, MessageLevel } from '../../application/ports/ISentryClient';
@@ -39,20 +40,10 @@ export const nativeSentryAdapter: NativeSentryAdapter = {
       debug: config.debug ?? false,
       enableAutoPerformanceTracing: true,
       enableNativeCrashHandling: true,
-
-      // Session Replay
-      replaysSessionSampleRate: config.replaysSessionSampleRate ?? 0.1,
-      replaysOnErrorSampleRate: config.replaysOnErrorSampleRate ?? 1.0,
       integrations: integrations.length > 0 ? integrations : undefined,
-
-      // Logs
-      enableLogs: config.enableLogs ?? false,
-
-      // PII
       sendDefaultPii: config.sendDefaultPii ?? false,
 
       beforeSend: (event) => {
-        // Privacy: Mask email in production unless sendDefaultPii is true
         if (!__DEV__ && !config.sendDefaultPii && event.user?.email) {
           event.user.email = '***@***.***';
         }
@@ -71,7 +62,7 @@ export const nativeSentryAdapter: NativeSentryAdapter = {
 
   captureMessage(message: string, level?: MessageLevel, metadata?: CaptureMetadata): string | undefined {
     return Sentry.captureMessage(message, {
-      level: level as Sentry.SeverityLevel,
+      level: level as SeverityLevel,
       tags: metadata?.tags,
       extra: metadata?.extra,
       user: metadata?.user,
@@ -82,7 +73,7 @@ export const nativeSentryAdapter: NativeSentryAdapter = {
     Sentry.addBreadcrumb({
       message: breadcrumb.message,
       category: breadcrumb.category,
-      level: breadcrumb.level as Sentry.SeverityLevel,
+      level: breadcrumb.level as SeverityLevel,
       data: breadcrumb.data,
       timestamp: breadcrumb.timestamp,
     });
