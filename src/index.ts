@@ -42,5 +42,6 @@ export {
   trackPackageError,
   addPackageBreadcrumb,
   trackPackageWarning,
+  trackPackageEvent,
 } from './presentation/utils/sentryTracking';
 export type { PackageErrorContext } from './presentation/utils/sentryTracking';

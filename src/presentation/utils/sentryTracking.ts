@@ -98,3 +98,33 @@ export function trackPackageWarning(
     // Silent fallback
   }
 }
+
+/**
+ * Track package lifecycle events (info level)
+ * Use this for important user actions and lifecycle events
+ *
+ * @example
+ * trackPackageEvent('subscription', 'paywall_shown', {
+ *   userId: 'user123',
+ *   packagesCount: 3
+ * });
+ */
+export function trackPackageEvent(
+  packageName: string,
+  eventName: string,
+  context?: Record<string, any>
+): void {
+  if (!SentryClient.isInitialized()) return;
+
+  try {
+    SentryClient.captureMessage(`[${packageName}] ${eventName}`, 'info', {
+      tags: {
+        package: packageName,
+        event: eventName,
+      },
+      extra: context,
+    });
+  } catch {
+    // Silent fallback
+  }
+}
