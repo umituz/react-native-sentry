@@ -43,7 +43,7 @@ export const nativeSentryAdapter: NativeSentryAdapter = {
       integrations: integrations.length > 0 ? integrations : undefined,
       sendDefaultPii: config.sendDefaultPii ?? false,
 
-      beforeSend: (event) => {
+      beforeSend: (event: any) => {
         if (!__DEV__ && !config.sendDefaultPii && event.user?.email) {
           event.user.email = '***@***.***';
         }

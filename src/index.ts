@@ -45,3 +45,11 @@ export {
   trackPackageEvent,
 } from './presentation/utils/sentryTracking';
 export type { PackageErrorContext } from './presentation/utils/sentryTracking';
+
+// Test Helpers (for verifying Sentry in production/TestFlight)
+export {
+  sendTestError,
+  sendTestMessage,
+  setTestUser,
+  runTestSuite,
+} from './presentation/utils/testHelpers';
