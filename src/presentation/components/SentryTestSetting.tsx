@@ -1,7 +1,9 @@
 /**
  * Sentry Test Setting Component
- * Single Responsibility: Provide Sentry test setting config (DEV only)
+ * Single Responsibility: Provide Sentry test setting config
  * Framework-agnostic design - returns configuration object
+ *
+ * Note: Application should handle __DEV__ check before calling this
  */
 
 import { runTestSuite } from "../utils/testHelpers";
@@ -20,20 +22,19 @@ export interface SentryTestSettingProps {
  * Creates Sentry test setting configuration
  * Returns setting item props for use with any UI framework
  *
+ * Application should wrap this in __DEV__ check:
+ *
  * @example
  * ```typescript
  * import { createSentryTestSetting } from '@umituz/react-native-sentry';
  *
- * const sentryTestConfig = createSentryTestSetting({ userId: 'user123' });
- * // Use with your UI framework's SettingItem component
+ * if (__DEV__) {
+ *   const sentryTestConfig = createSentryTestSetting({ userId: 'user123' });
+ *   // Use with your UI framework's SettingItem component
+ * }
  * ```
  */
 export function createSentryTestSetting(props: SentryTestSettingProps = {}) {
-    // Only return config in DEV mode
-    if (!__DEV__) {
-        return null;
-    }
-
     return {
         type: "setting-item" as const,
         icon: "bug" as const,
