@@ -8,6 +8,7 @@ export interface UserData {
   email?: string;
   username?: string;
   ipAddress?: string;
+  extras?: Record<string, any>;
 }
 
 export interface ErrorTags {

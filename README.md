@@ -73,6 +73,25 @@ function MyComponent() {
 }
 ```
 
+### Test Helpers (Production/TestFlight)
+
+Verify Sentry is working in production builds:
+
+```typescript
+import { sendTestError, sendTestMessage, runTestSuite } from '@umituz/react-native-sentry';
+
+// Send a single test error
+sendTestError();
+
+// Send a test message
+sendTestMessage();
+
+// Run complete test suite
+runTestSuite('user-123');
+```
+
+Add a debug button in your app (e.g., Settings screen) to trigger these tests in TestFlight builds.
+
 ## License
 
 MIT
