@@ -53,10 +53,3 @@ export {
   setTestUser,
   runTestSuite,
 } from './presentation/utils/testHelpers';
-
-// UI Components (for settings integration)
-export {
-  SentryTestSetting,
-  createSentryTestSetting,
-} from './presentation/components/SentryTestSetting';
-export type { SentryTestSettingProps } from './presentation/components/SentryTestSetting';

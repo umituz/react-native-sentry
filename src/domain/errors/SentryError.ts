@@ -14,7 +14,7 @@ export class SentryError extends Error {
     Object.setPrototypeOf(this, SentryError.prototype);
   }
 
-  toString(): string {
+  override toString(): string {
     return `${this.name} [${this.code}]: ${this.message}`;
   }
 }

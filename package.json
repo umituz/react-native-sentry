@@ -1,6 +1,6 @@
 {
   "name": "@umituz/react-native-sentry",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Production-ready error tracking and performance monitoring for React Native apps",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@sentry/react-native": "^5.36.0",
+    "@sentry/types": "^10.32.1",
     "@types/react": "~19.1.10",
     "react": "19.1.0",
     "react-native": "0.81.5",
